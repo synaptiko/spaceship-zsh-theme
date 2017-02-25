@@ -127,7 +127,7 @@ spaceship_host() {
 # Current directory.
 # Return only three last items of path
 spaceship_current_dir() {
-  echo -n "%{$fg_bold[cyan]%}"
+  echo -n "%{$fg_bold[blue]%}"
   echo -n "%${SPACESHIP_PROMPT_TRUNC}~";
   echo -n "%{$reset_color%}"
 }
@@ -207,15 +207,15 @@ spaceship_git_status() {
     indicators+="$(spaceship_git_stashed)"
     indicators+="$(spaceship_git_unpushed_unpulled)"
 
-    [ -n "${indicators}" ] && indicators=" [${indicators}]";
+    [ -n "${indicators}" ] && indicators="${indicators}";
 
     # Do not show git prefix if prefixes are disabled
-    [[ $SPACESHIP_PREFIX_SHOW == true ]] && echo -n "%B${SPACESHIP_PREFIX_GIT}%b" || echo -n ' '
+    [[ $SPACESHIP_PREFIX_SHOW == true ]] && echo -n "%{$fg_bold[green]%}${SPACESHIP_PREFIX_GIT}%{$reset_color%}" || echo -n ' '
 
-    echo -n "%{$fg_bold[magenta]%}"
+    echo -n "%{$fg_bold[green]%}"
     echo -n "$(git_current_branch)"
     echo -n "%{$reset_color%}"
-    echo -n "%{$fg_bold[red]%}"
+    echo -n "%{$fg_bold[grey]%}"
     echo -n "$indicators"
     echo -n "%{$reset_color%}"
   fi
@@ -425,9 +425,9 @@ spaceship_vi_mode_disable() {
 
 # Command prompt.
 # Paint $PROMPT_SYMBOL in red if previous command was fail and
-# paint in green if everything was OK.
+# paint in blue if everything was OK.
 spaceship_return_status() {
-  echo -n "%(?.%{$fg[green]%}.%{$fg[red]%})"
+  echo -n "%(?.%{$fg[blue]%}.%{$fg[red]%})"
   echo -n "%B${SPACESHIP_PROMPT_SYMBOL}%b "
   echo -n "%{$reset_color%}"
 }
@@ -464,9 +464,7 @@ spaceship_prompt() {
 
 # PS2 - continuation interactive prompt
 spaceship_ps2_prompt() {
-  echo -n "%{$fg_bold[yellow]%}"
-  echo -n "%{$SPACESHIP_PROMPT_SYMBOL%} "
-  echo -n "%{$reset_color%}"
+  echo -n "  "
 }
 
 # Disable python virtualenv environment prompt prefix
